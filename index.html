@@ -11,7 +11,7 @@
     <div id="app">
         <div class="summary">
             <h1 class="tittle">HASIL</h1>
-            <h1 class="result"></h1>
+            <p class="result">Silakan pilih batu, kertas, atau gunting!</p>
         </div>
         <div class="games">
             <div class="option" onclick="pickOption('🖐️')">🖐️</div>
@@ -62,9 +62,12 @@
             console.log('Pemenangnya adalah', start.winner);
 
             // Menampilkan hasil di HTML
-            document.querySelector('.result').innerText = 
-                `${start.playerOption} VS ${start.botOption}
-                Pemenang: ${start.winner}`;
+            const resultElement = document.querySelector('.result');
+            if (start.winner === "SERI") {
+                resultElement.innerText = `${start.playerOption} VS ${start.botOption}\nHasil: Seri`;
+            } else {
+                resultElement.innerText = `${start.playerOption} VS ${start.botOption}\nPemenang: ${start.winner}`;
+            }
         }
     </script>
 </body>
