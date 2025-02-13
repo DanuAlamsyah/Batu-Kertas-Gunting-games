@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styling.css">
-    <title>danu jarwis</title>
+    <link rel="shortcut icon" href="iconTitle.ico" type="image/x-icon">
+    <title>Batu Kertas Gunting</title>
 </head>
 <body>
     <div id="app">
@@ -20,48 +21,50 @@
     </div>
 
     <script>
-        class Start{
-            constructor(){
-                this.playerName = "Kamu"
-                this.botName = "Bot"
-                this.playerOption;
-                this.botOption;
-                this.winner=""
+        class Start {
+            constructor() {
+                this.playerName = "Kamu";
+                this.botName = "Bot";
+                this.playerOption = "";
+                this.botOption = "";
+                this.winner = "";
             }
 
-            get getbotOption(){
-                return this.botOption;
-            }
-
-            set setbotOption(params){
-                this.botOption = params;
-            }
-
-            get getPlayerOption(){
-                return this.playerOption;
-            }
-
-            set setPlayerOption(params){
-                this.playerOption = params;
-            }
-
-            botBrain(){
+            botBrain() {
                 const options = ['🖐️', '✊', '✌️'];
                 const random = Math.floor(Math.random() * options.length);
-                console.log('Bot memilih', options[random]);
+                this.botOption = options[random]; // Menyimpan pilihan bot
+                console.log('Bot memilih', this.botOption);
             }
 
-            winCalculation(){
-
+            winCalculation() {
+                if (this.botOption === this.playerOption) {
+                    this.winner = "SERI";
+                } else if (
+                    (this.botOption === '🖐️' && this.playerOption === '✊') ||
+                    (this.botOption === '✊' && this.playerOption === '✌️') ||
+                    (this.botOption === '✌️' && this.playerOption === '🖐️')
+                ) {
+                    this.winner = this.botName;
+                } else {
+                    this.winner = this.playerName;
+                }
             }
         }
-    
 
-        function pickOption(params){
+        function pickOption(params) {
             const start = new Start();
-            start.setPlayerOption = params;
+            start.playerOption = params;
             start.botBrain();
-            console.log('Kamu memilihh', start.getPlayerOption);
+            start.winCalculation();
+            
+            console.log('Kamu memilih', start.playerOption);
+            console.log('Pemenangnya adalah', start.winner);
+
+            // Menampilkan hasil di HTML
+            document.querySelector('.result').innerText = 
+                `${start.playerOption} VS ${start.botOption}
+                Pemenang: ${start.winner}`;
         }
     </script>
 </body>
