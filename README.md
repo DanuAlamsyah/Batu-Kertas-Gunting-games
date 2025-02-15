@@ -1,1 +1,1 @@
-# Batu-Kertas-Gunting-games
+# batu-kertas-gunting-games
